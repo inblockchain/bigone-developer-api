@@ -1,0 +1,11 @@
+{
+  "docs": {
+    "LEARN": ["get_started"],
+    "SDK REFERENCE": ["sdk_overview", "sdk_specification"]
+  },
+  "docs-other": {
+    "API REFERENCE": ["api", "authentication", "response", "data_structs", "api_error_codes"],
+    "PUBLIC API": ["api_tickers"],
+    "PRIVATE API": ["api_accounts"]
+  }
+}

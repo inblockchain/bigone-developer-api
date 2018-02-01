@@ -1,0 +1,53 @@
+/* your custom css */
+
+footer .fbOpenSource {
+    width: 60px;
+}
+
+footer.nav-footer {
+    background-color: #282a36;
+}
+
+.mainContainer .wrapper article a {
+    color: #4d99bf;
+    text-decoration: underline;
+}
+
+.homeContainer {
+    background-image: url(/img/wallpaper.jpg);
+    background-position: center;
+    height: 700px;
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.homeSplashFade {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.inner h2 {
+    color: white;
+}
+
+.buttonWrapper a {
+    color: white;
+    border-color: white;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
