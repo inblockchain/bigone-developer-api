@@ -6,7 +6,7 @@ sidebar_label: Overview
 
 Welcome to Developer API Documents
 
-**API Endpoint: https://api.big.one/**
+**API Endpoint: https://api.big.one/v1/**
 
 ## Public API
 

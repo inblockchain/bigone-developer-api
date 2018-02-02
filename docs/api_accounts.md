@@ -8,8 +8,10 @@ Accounts is the balances info of current user.
 
 ### Account List
 
+Account List is the balances of all the assets
+
 ```
-GET /accounts
+GET /private/accounts
 ```
 Response is an [Account](/bigone-developer-api/docs/data_structs.html#account) Collection type.
 
@@ -26,7 +28,7 @@ Response is an [Account](/bigone-developer-api/docs/data_structs.html#account) C
 ### Balance of one currency 
 
 ```
-GET /accounts/{asset}
+GET /private/accounts/{asset}
 ```
 
 Parameters
