@@ -19,7 +19,7 @@ const siteConfig = {
   title: 'BigONE Developer API' /* title for your website */,
   tagline: 'Documents for BigONE Developer API',
   url: 'https://api.big.one' /* your website url */,
-  baseUrl: '/' /* base url for your project */,
+  baseUrl: '/bigone-developer-api/' /* base url for your project */,
   projectName: 'bigone-developer-api', // or set an env variable PROJECT_NAME
   headerLinks: [
     {doc: 'get_started', label: 'Docs'},

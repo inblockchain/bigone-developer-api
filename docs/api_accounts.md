@@ -11,7 +11,7 @@ Accounts is the balances info of current user.
 ```
 GET /accounts
 ```
-Response is an [Account](/docs/data_structs.html#account) Collection type.
+Response is an [Account](/bigone-developer-api/docs/data_structs.html#account) Collection type.
 
 ```
 [
@@ -35,7 +35,7 @@ Name | Description | Example
 ---- | --- | ---
 asset | asset name | btc 
 
-Response is an [Account](/docs/data_structs.html#account) type
+Response is an [Account](/bigone-developer-api/docs/data_structs.html#account) type
 
 ```
 {
