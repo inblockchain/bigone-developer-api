@@ -10,8 +10,8 @@ Welcome to Developer API Documents
 
 ## Public API
 
-* [Tickers](/bigone-developer-api/docs/api_tickers.html)
+* [Tickers](/docs/api_tickers.html)
 
 ## Private API
 
-* [Accounts](/bigone-developer-api/docs/api_accounts.html)
+* [Accounts](/docs/api_accounts.html)

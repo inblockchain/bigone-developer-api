@@ -25,7 +25,6 @@ Developer API 响应中的 HTTP CODE 遵循[RFC约定](https://zh.wikipedia.org/
 
 接口数据会放在 data 字段返回。其中 data 可能是 Object 或者 Collection
 
-
 ## Error Response Struct
 
 请求错误的 Response body 结构如下：
@@ -37,4 +36,4 @@ Developer API 响应中的 HTTP CODE 遵循[RFC约定](https://zh.wikipedia.org/
 }
 ```
 
-具体的 error code 定义详见 [错误说明](/bigone-developer-api/docs/api_error_codes.html)
+具体的 error code 定义详见 [错误说明](/docs/api_error_codes.html)

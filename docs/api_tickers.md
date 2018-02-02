@@ -40,7 +40,7 @@ Name | Description | Example
 ---- | --- | ---
 market | market name | ETH-BTC
 
-Response is a [Ticker](/bigone-developer-api/docs/data_structs.html#ticker) object
+Response is a [Ticker](/docs/data_structs.html#ticker) object
 
 ```
 {

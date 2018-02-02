@@ -35,13 +35,13 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href="/bigone-developer-api/docs/get_started.html">
+            <a href="/docs/get_started.html">
               Getting Started
             </a>
-            <a href="/bigone-developer-api/docs/sdk_overview.html">
+            <a href="/docs/sdk_overview.html">
               Guides
             </a>
-            <a href="/bigone-developer-api/docs/api.html">
+            <a href="/docs/api.html">
               API Reference
             </a>
           </div>

@@ -19,7 +19,7 @@ const siteConfig = {
   title: 'BigONE Developer API' /* title for your website */,
   tagline: 'Documents for BigONE Developer API',
   url: 'https://api.big.one' /* your website url */,
-  baseUrl: '/bigone-developer-api/' /* base url for your project */,
+  baseUrl: '/' /* base url for your project */,
   projectName: 'bigone-developer-api', // or set an env variable PROJECT_NAME
   headerLinks: [
     {doc: 'get_started', label: 'Docs'},
@@ -49,7 +49,7 @@ const siteConfig = {
   },
   scripts: ['https://buttons.github.io/buttons.js'],
   // You may provide arbitrary config keys to be used as needed by your template.
-  repoUrl: 'https://github.com/facebook/bigone-developer-api',
+  repoUrl: 'https://github.com/inblockchain/bigone-developer-api',
 };
 
 module.exports = siteConfig;
