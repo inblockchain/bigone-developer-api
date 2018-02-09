@@ -5,7 +5,7 @@
   },
   "docs-other": {
     "API REFERENCE": ["api", "authentication", "response", "data_structs", "api_error_codes"],
-    "PUBLIC API": ["api_tickers"],
-    "PRIVATE API": ["api_accounts"]
+    "PUBLIC API": ["api_tickers", "api_order_books"],
+    "PRIVATE API": ["api_accounts", "api_orders"]
   }
 }

@@ -55,3 +55,36 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGlrZXkiOiJjZWU4OGFiMGJjNjk0MzU3ODRiN2R
 ```
 
 可以在 jwt.io 网站上生成token、解析token以便验证。
+
+
+# Partner Key
+
+合作伙伴需要将自己的 Key 放在 JWT Token 的 `sub` 字段中。 具体签名步骤和上面一样。
+
+举例：
+
+JWT Header
+```
+{
+  "typ": "JWT",
+  "alg": "HS256"
+}
+```
+
+JWT Payload
+```
+{
+  "apikey": "cee88ab0bc69435784b7db0545e85647",
+  "nonce": "1517492751610",
+  "sub": "PARTNER KEY"
+}
+```
+
+将用户密钥 `testsecret` 和 Partner Secret 用 `:` 拼接：`testsecret:testpartnersecret`, 然后加密jwt。
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJjZWU4OGFiMGJjNjk0MzU3ODRiN2RiMDU0NWU4NTY0NyIsIm5vbmNlIjoiMTUxNzQ5Mjc1MTYxMCIsInN1YiI6IlBBUlRORVIgS0VZIn0.XNsxzByYEwzVTgG2xD4YFbuSUuPTa7Y0qb-J9KL9luo
+```
+
+
+

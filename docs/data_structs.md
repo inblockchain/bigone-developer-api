@@ -53,6 +53,22 @@ timestamp | integer | order create time | 144425342
 
 Attrubute Name | Type | Description | Example
 ---- | --- | --- | ---
-market | string | market name | btceth
 bids | list | buy orders collection ||
 asks | list | sell orders collection ||
+
+
+## Order
+
+Attrubute Name | Type | Description | Example
+---- | --- | --- | ---
+user_id | string | id of user ||
+order_id | string | id of order ||
+market | string | market name ||
+order_type | string | order type, always "LIMIT"||
+side | string | order side, one of ASK/BID ||
+state | string | order status, one of PARTIALLY_FILLED/FILLED/PENDING/CANCLED ||
+price | string | order price ||
+amount | string | order amount ||
+filled | string | already filled amount ||
+created_at | string | create time of order ||
+updated_at | string | update time of order ||

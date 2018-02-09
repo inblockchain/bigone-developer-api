@@ -4,11 +4,7 @@ title: Accounts
 sidebar_label: Accounts
 ---
 
-Accounts is the balances info of current user.
-
-### Account List
-
-Account List is the balances of all the assets
+### Balance of all assets
 
 ```
 GET /private/accounts
@@ -25,7 +21,7 @@ Response is an [Account](/docs/data_structs.html#account) Collection type.
 ]
 ```
 
-### Balance of one currency 
+### Balance of one asset 
 
 ```
 GET /private/accounts/{asset}
