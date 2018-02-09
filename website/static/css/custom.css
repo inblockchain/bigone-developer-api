@@ -19,6 +19,7 @@ footer.nav-footer {
     height: 700px;
     position: relative;
     background-repeat: no-repeat;
+    background-color: black;
 }
 
 .homeSplashFade {
