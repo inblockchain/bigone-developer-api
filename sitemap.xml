@@ -9,6 +9,8 @@
 <url> <loc>https://api.big.one/blog/2017/04/10/blog-post-two.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://api.big.one/blog/2016/03/11/blog-post.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://api.big.one/docs/api_accounts.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://api.big.one/docs/api_accounts.html" /> </url>
+<url> <loc>https://api.big.one/docs/api_order_books.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://api.big.one/docs/api_order_books.html" /> </url>
+<url> <loc>https://api.big.one/docs/api_orders.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://api.big.one/docs/api_orders.html" /> </url>
 <url> <loc>https://api.big.one/docs/api_tickers.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://api.big.one/docs/api_tickers.html" /> </url>
 <url> <loc>https://api.big.one/docs/api.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://api.big.one/docs/api.html" /> </url>
 <url> <loc>https://api.big.one/docs/authentication.html</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://api.big.one/docs/authentication.html" /> </url>
