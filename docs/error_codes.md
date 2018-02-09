@@ -1,5 +1,5 @@
 ---
-id| pi_error_cod
+id: api_error_codes
 title: Error Codes
 sidebar_label: Error Codes
 ---
