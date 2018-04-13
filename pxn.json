@@ -1,0 +1,254 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+        "version": "1.0.0",
+        "title": "PXN OpenAPI",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "yuchanghong@pxn.one"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "api.pxn.one",
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Withdrawal",
+            "description": "User Withdrawals"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/withdrawals": {
+            "get": {
+                "tags": [
+                    "Withdrawal"
+                ],
+                "summary": "Get User Withdrawal History",
+                "description": "Returns user withdrawals. Require `wallet:read` scope.",
+                "operationId": "getWithdrawal",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "asset",
+                        "description": "Asset Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Returns limited size of records ",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset_id",
+                        "description": "Returns records after this ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of withdrawal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Withdrawal"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "wallet:read"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Withdrawal"
+                ],
+                "summary": "Create Withdrawal",
+                "description": "Create user withdrawal. Require `wallet:write` scope.",
+                "operationId": "createWithdrawal",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "description": "Optional description in *Markdown*",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWithdrawalBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "create withdrawal success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Withdrawal"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "wallet:write"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "CreateWithdrawalBody": {
+                "type": "object",
+                "properties": {
+                    "asset": {
+                        "type": "string",
+                        "description": "Asset Name"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "description": "Withdraw Amount"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Withdraw type",
+                        "enum": [
+                            "INTERNAL",
+                            "NORMAL"
+                        ]
+                    },
+                    "recipient_id": {
+                        "type": "integer",
+                        "description": "Withdraw Recipient ID. Only avalible when withdraw type is `INTERNAL`.",
+                        "format": "int64"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "Withdraw Address. Only avalible when withdraw type is `NORMAL`.",
+                        "format": "int64"
+                    }
+                },
+                "required": [
+                    "asset",
+                    "amount",
+                    "type"
+                ],
+                "example": {
+                    "asset": "EOS",
+                    "amount": "200.123",
+                    "type": "INTERNAL",
+                    "recipient_id": 10096
+                }
+            },
+            "Deposit": {},
+            "Withdrawal": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Withdraw ID",
+                        "format": "int64"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "Withdraw Status",
+                        "enum": [
+                            "pending",
+                            "transaction_created",
+                            "completed",
+                            "failed"
+                        ]
+                    },
+                    "customer_id": {
+                        "type": "string",
+                        "description": "Withdraw User ID",
+                        "example": 19900
+                    },
+                    "recipient_id": {
+                        "type": "integer",
+                        "description": "Internal withdraw Recipient ID",
+                        "format": "int64",
+                        "example": 19903
+                    },
+                    "asset_uuid": {
+                        "type": "string",
+                        "description": "Asset UUID",
+                        "example": "EOS"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "description": "Withdraw Amount",
+                        "example": "200.124"
+                    },
+                    "target_address": {
+                        "type": "string",
+                        "description": "Withdraw Address",
+                        "example": "0x3c35858196C43e9Db361445dAc49Df61a177629b"
+                    },
+                    "completed_at": {
+                        "type": "string",
+                        "description": "Withdraw Amount",
+                        "format": "date-time"
+                    },
+                    "inserted_at": {
+                        "type": "string",
+                        "description": "Withdraw Amount",
+                        "format": "date-time"
+                    },
+                    "is_internal": {
+                        "type": "boolean",
+                        "description": "Withdraw Type"
+                    }
+                }
+            }
+        }
+    }
+}
