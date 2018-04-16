@@ -213,7 +213,7 @@ components:
             - confirmed
             - unconfirmed
         user_id:
-          type: string
+          type: integer
           description: Deposit User ID
           example: 19900
         sender_id:
@@ -221,6 +221,11 @@ components:
           description: Internal deposit sender ID
           format: int64
           example: 19903
+        confirms:
+          type: integer
+          description: Deposit comfirms
+          format: int64
+          example: 2
         txid:
           type: string
           description: Deposit transaction ID
