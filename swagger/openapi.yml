@@ -1,0 +1,244 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: PXN OpenAPI
+  contact:
+    email: yuchanghong@pxn.one
+servers:
+  - url: 'https://api.{BROKER_DOMAIN}/api/v1'
+tags:
+  - name: Withdrawal
+    description: User Withdrawals
+  - name: Deposit
+    description: User Deposits
+paths:
+  /deposits:
+    get:
+      tags:
+        - Deposit
+      summary: Get User Deposit History
+      description: 'Returns user deposits. Required **wallet:read** scope.'
+      operationId: getDeposits
+      parameters:
+        - in: query
+          name: asset
+          description: Asset Name
+          required: true
+          schema:
+            type: string
+            example: EOS
+        - in: query
+          name: limit
+          description: 'Returns limited size of records '
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: offset_id
+          description: Returns records after this ID
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: internal
+          description: Only returns internal deposits
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of deposits
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deposit'
+  /withdrawals:
+    get:
+      tags:
+        - Withdrawal
+      summary: Get User Withdrawal History
+      description: 'Returns user withdrawals. Required **wallet:read** scope.'
+      operationId: getWithdrawal
+      parameters:
+        - in: query
+          name: asset
+          description: Asset Name
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: limit
+          description: 'Returns limited size of records '
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: offset_id
+          description: Returns records after this ID
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: internal
+          description: Only returns internal withdrawals
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of withdrawal
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Withdrawal'
+
+    post:
+      tags:
+        - Withdrawal
+      summary: Create Withdrawal
+      description: 'Create user withdrawal. Required **wallet:write** scope.'
+      operationId: createWithdrawal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/CreateWithdrawalBody'
+      responses:
+        '200':
+          description: create withdrawal success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Withdrawal'
+      security:
+        - bearerAuth:
+            - 'wallet:write'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  requestBodies:
+    CreateWithdrawalBody:
+      type: object
+      properties:
+        asset:
+          type: string
+          description: Asset Name
+          required: true
+          example: EOS
+        amount:
+          type: string
+          description: Withdraw Amount
+          required: true
+        type:
+          type: string
+          description: Withdraw type
+          required: true
+          enum:
+            - INTERNAL
+            - NORMAL
+        recipient_id:
+          type: integer
+          description: Withdraw Recipient ID. Only avalible when withdraw type is `INTERNAL`.
+          format: int64
+        address:
+          type: string
+          description: Withdraw Address. Only avalible when withdraw type is `NORMAL`.
+          format: int64
+  schemas:
+    Withdrawal:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Withdraw ID
+          format: int64
+        state:
+          type: string
+          description: Withdraw Status
+          enum:
+            - pending
+            - transaction_created
+            - completed
+            - failed
+        user_id:
+          type: string
+          description: Withdraw User ID
+          example: 19900
+        recipient_id:
+          type: integer
+          description: Internal withdraw Recipient ID
+          format: int64
+          example: 19903
+        asset_uuid:
+          type: string
+          description: Asset UUID
+          example: EOS
+        amount:
+          type: string
+          description: Withdraw Amount
+          example: '200.124'
+        target_address:
+          type: string
+          description: Withdraw Address
+          example: '0x3c35858196C43e9Db361445dAc49Df61a177629b'
+        completed_at:
+          type: string
+          description: Withdraw completed at
+          format: date-time
+        inserted_at:
+          type: string
+          description: Withdraw record insert at
+          format: date-time
+        is_internal:
+          type: boolean
+          description: Withdraw Type
+    Deposit:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Deposit ID
+          format: int64
+        state:
+          type: string
+          description: Deposit Status
+          enum:
+            - confirmed
+            - unconfirmed
+        user_id:
+          type: string
+          description: Deposit User ID
+          example: 19900
+        sender_id:
+          type: integer
+          description: Internal deposit sender ID
+          format: int64
+          example: 19903
+        txid:
+          type: string
+          description: Deposit transaction ID
+        amount:
+          type: string
+          description: Withdraw Amount
+          example: '200.124'
+        confirmed_at:
+          type: string
+          description: Deposit confirmated at
+          format: date-time
+        created_at:
+          type: string
+          description: Deposit record created at
+          format: date-time
+        is_internal:
+          type: boolean
+          description: Deposit Type
+        note:
+          type: string
+          description: Deposit note
