@@ -12,6 +12,24 @@ tags:
   - name: Deposit
     description: User Deposits
 paths:
+  /customers:
+    post:
+      tags:
+        - Customer
+      summary: Create customer
+      description: 'Create customer. Required **customer:write** scope.'
+      operationId: createCustomer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/CreateCustomerBody'
+      responses:
+        '201':
+          description: create customer success
+      security:
+        - bearerAuth:
+          - wallet:write
   /deposits:
     get:
       tags:
@@ -117,6 +135,27 @@ components:
       scheme: bearer
       bearerFormat: JWT
   requestBodies:
+    CreateCustomerBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User Email
+          required: true
+          example: test@pxn.one
+        mobile:
+          type: string
+          description: User Mobile
+          example: 13888888888
+        nation_code:
+          type: string
+          description: User Mobile
+          example: 86
+        identity:
+          type: string
+          description: User identity
+          required: true
+          example: SOME_IDENTITY
     CreateWithdrawalBody:
       type: object
       properties:
