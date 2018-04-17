@@ -1,0 +1,110 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Swagger Petstore
+  contact:
+    email: apiteam@swagger.io
+host: api.pxn.one
+basePath: /api/v1
+tags:
+  - name: withdrawal
+    description: User Withdrawal
+  - name: deposit
+    description: User Deposit
+  - name: customer
+    description: Customer
+schemes:
+  - https
+paths:
+  /withdrawals:
+    post:
+      tags:
+        - withdrawal
+      summary: Create withdrawal
+      description: 'Required **wallet:write** permission.'
+      operationId: createWithdrawal
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: withdrawal
+          schema:
+            type: object
+            properties:
+              asset_symbol:
+                type: string
+                example: EOS
+              amount:
+                type: string
+                example: 12.32
+              identity:
+                type: string
+                example: some_identity
+      responses:
+        '201':
+          description: Create success
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Withdraw ID
+                format: int64
+              state:
+                type: string
+                description: Withdraw Status
+                enum:
+                  - pending
+                  - transaction_created
+                  - completed
+                  - failed
+              identity:
+                type: string
+                description: Internal withdraw Recipient Identity
+                example: SOME_IDENTITY
+              asset_symbol:
+                type: string
+                description: Asset Symbol
+                example: EOS
+              amount:
+                type: string
+                description: Withdraw Amount
+                example: '200.124'
+              address:
+                type: string
+                description: Withdraw Address
+                example: '0x3c35858196C43e9Db361445dAc49Df61a177629b'
+              completed_at:
+                type: string
+                description: Withdraw completed at
+                format: date-time
+              created_at:
+                type: string
+                description: Withdraw record created at
+                format: date-time
+              type:
+                type: string
+                description: Withdraw Type
+                enum:
+                  - ON_CHAIN
+                  - OFF_CHAIN
+                  - INTERNAL
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
