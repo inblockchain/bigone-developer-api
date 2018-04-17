@@ -21,8 +21,8 @@ paths:
       operationId: getDeposits
       parameters:
         - in: query
-          name: asset
-          description: Asset Name
+          name: asset_symbol
+          description: Asset Symbol
           required: true
           schema:
             type: string
@@ -39,12 +39,6 @@ paths:
           required: false
           schema:
             type: integer
-        - in: query
-          name: internal
-          description: Only returns internal deposits
-          required: false
-          schema:
-            type: boolean
       responses:
         '200':
           description: List of deposits
@@ -54,6 +48,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Deposit'
+      security:
+        - bearerAuth:
+          - wallet:read
   /withdrawals:
     get:
       tags:
@@ -80,12 +77,6 @@ paths:
           required: false
           schema:
             type: integer
-        - in: query
-          name: internal
-          description: Only returns internal withdrawals
-          required: false
-          schema:
-            type: boolean
       responses:
         '200':
           description: List of withdrawal
@@ -95,7 +86,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Withdrawal'
-
+      security:
+        - bearerAuth:
+          - wallet:read
     post:
       tags:
         - Withdrawal
@@ -116,7 +109,7 @@ paths:
                 $ref: '#/components/schemas/Withdrawal'
       security:
         - bearerAuth:
-            - 'wallet:write'
+          - wallet:write
 components:
   securitySchemes:
     bearerAuth:
@@ -127,9 +120,9 @@ components:
     CreateWithdrawalBody:
       type: object
       properties:
-        asset:
+        asset_symbol:
           type: string
-          description: Asset Name
+          description: Asset Symbol
           required: true
           example: EOS
         amount:
@@ -143,9 +136,9 @@ components:
           enum:
             - INTERNAL
             - NORMAL
-        recipient_id:
-          type: integer
-          description: Withdraw Recipient ID. Only avalible when withdraw type is `INTERNAL`.
+        indentity:
+          type: string
+          description: Withdraw indentity. Only avalible when withdraw type is `INTERNAL`.
           format: int64
         address:
           type: string
@@ -167,24 +160,19 @@ components:
             - transaction_created
             - completed
             - failed
-        user_id:
+        identity:
           type: string
-          description: Withdraw User ID
-          example: 19900
-        recipient_id:
-          type: integer
-          description: Internal withdraw Recipient ID
-          format: int64
-          example: 19903
-        asset_uuid:
+          description: Internal withdraw Recipient Identity
+          example: SOME_IDENTITY
+        asset_symbol:
           type: string
-          description: Asset UUID
+          description: Asset Symbol
           example: EOS
         amount:
           type: string
           description: Withdraw Amount
           example: '200.124'
-        target_address:
+        address:
           type: string
           description: Withdraw Address
           example: '0x3c35858196C43e9Db361445dAc49Df61a177629b'
@@ -192,13 +180,17 @@ components:
           type: string
           description: Withdraw completed at
           format: date-time
-        inserted_at:
+        created_at:
           type: string
-          description: Withdraw record insert at
+          description: Withdraw record created at
           format: date-time
-        is_internal:
-          type: boolean
+        type:
+          type: string
           description: Withdraw Type
+          enum:
+            - ON_CHAIN
+            - OFF_CHAIN
+            - INTERNAL
     Deposit:
       type: object
       properties:
@@ -211,16 +203,11 @@ components:
           description: Deposit Status
           enum:
             - confirmed
-            - unconfirmed
-        user_id:
-          type: integer
-          description: Deposit User ID
-          example: 19900
-        sender_id:
-          type: integer
-          description: Internal deposit sender ID
-          format: int64
-          example: 19903
+            - pending
+        identity:
+          type: string
+          description: Internal deposit identity. If this field is not null, this is a internal deposit
+          example: some_identity
         confirms:
           type: integer
           description: Deposit comfirms
@@ -233,6 +220,9 @@ components:
           type: string
           description: Withdraw Amount
           example: '200.124'
+        note:
+          type: string
+          description: Deposit note
         confirmed_at:
           type: string
           description: Deposit confirmated at
@@ -241,9 +231,3 @@ components:
           type: string
           description: Deposit record created at
           format: date-time
-        is_internal:
-          type: boolean
-          description: Deposit Type
-        note:
-          type: string
-          description: Deposit note
