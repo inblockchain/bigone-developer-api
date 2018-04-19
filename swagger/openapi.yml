@@ -175,9 +175,9 @@ components:
           enum:
             - INTERNAL
             - NORMAL
-        indentity:
+        identity:
           type: string
-          description: Withdraw indentity. Only avalible when withdraw type is `INTERNAL`.
+          description: Withdraw identity. Only avalible when withdraw type is `INTERNAL`.
           format: int64
         address:
           type: string
@@ -195,10 +195,10 @@ components:
           type: string
           description: Withdraw Status
           enum:
-            - pending
-            - transaction_created
-            - completed
-            - failed
+            - PENDING
+            - TRANSACTION_CREATED
+            - COMPLETED
+            - FAILED
         identity:
           type: string
           description: Internal withdraw Recipient Identity
@@ -241,8 +241,12 @@ components:
           type: string
           description: Deposit Status
           enum:
-            - confirmed
-            - pending
+            - PENDING
+            - CONFIRMED
+        asset_symbol:
+          type: string
+          description: Asset Symbol
+          example: EOS
         identity:
           type: string
           description: Internal deposit identity. If this field is not null, this is a internal deposit
